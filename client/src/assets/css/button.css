@@ -1,0 +1,125 @@
+:root {
+    --white-color: rgb(240, 240, 240);
+    --white-color-darker: rgb(228, 228, 228);
+    --white-color-lighter: rgb(255, 255, 255);
+    --gradient1: #000428;
+    --gradient2: #004e92;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-10%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.button {
+    position: relative;
+    width: 180px;
+    height: 80px;
+    left: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out both;
+    animation-delay: 0.5s;
+    cursor: pointer;
+    margin-top: -36px;
+}
+
+.button input {
+    color: var(--white-color);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.6em;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.button::after,
+.button::before {
+    border: 3px solid var(--white-color);
+    content: "";
+    position: absolute;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: transform 0.3s ease;
+}
+
+.button:hover input {
+    color: var(--white-color-lighter);
+}
+
+.button:hover::after {
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to left top, var(--gradient1), var(--gradient2));
+    transform: translate(-4px, -4px);
+}
+
+.button:hover::before {
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to bottom right, var(--gradient1), var(--gradient2));
+    transform: translate(4px, 4px);
+}
+
+.button--position {
+    position: absolute !important;
+    bottom: 10%;
+    right: 0;
+}
+
+/* Secondary */
+.button.secondary input {
+    color: #000428;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.6em;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.button.secondary::after,
+.button.secondary::before {
+    border: 3px solid #000428;
+    content: "";
+    position: absolute;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: transform 0.3s ease;
+}
+
+.button.secondary:hover input {
+    color: #000;
+}
+
+.button.secondary:hover::after {
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to left top, var(--gradient1), var(--gradient2));
+    transform: translate(-4px, -4px);
+}
+
+.button.secondary:hover::before {
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to bottom right, var(--gradient1), var(--gradient2));
+    transform: translate(4px, 4px);
+}

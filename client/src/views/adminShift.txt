@@ -1,0 +1,321 @@
+import React, { memo, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { message, Button, Modal } from "antd";
+import { ShiftAdminContext } from "../contexts/ShiftAdminContext";
+import "../assets/css/shift/adminShift.css";
+import Loader from "./Loader";
+import { StaffContext } from "../contexts/StaffContext";
+import List from "../components/shift/List";
+
+const AdminShift = () => {
+    // message
+    const [messageApi, contextHolder] = message.useMessage();
+
+    useEffect(() => {
+        messageApi.info("Here is the Shift Table! ^^");
+        getAllTable();
+    }, []);
+
+    // Context
+    const {
+        shiftAdminState: { tables },
+        getAllTable,
+        getAllShifts,
+        deleteShift,
+        deleteShiftArray,
+        setDeleteShiftArray,
+    } = useContext(ShiftAdminContext);
+
+    const { open, setOpen, confirmLoading, setConfirmLoading } = useContext(StaffContext);
+
+    // State
+    const [percent, setPercent] = useState(0.3);
+
+    const changePercent = (event) => {
+        setPercent(event.target.value);
+    };
+
+    // Modal
+    const handleOk = async () => {
+        for (let item of deleteShiftArray) {
+            // console.log(item.shiftId, item.shiftTime);
+            await deleteShift(item.shiftId, item.shiftTime);
+        }
+
+        setConfirmLoading(true);
+        setTimeout(() => {
+            setOpen(false);
+            setConfirmLoading(false);
+            window.location.reload(false);
+        }, 2000);
+    };
+
+    const handleCancel = () => {
+        setDeleteShiftArray([]);
+        setOpen(false);
+        window.location.reload(false);
+    };
+
+    const confirm = () => {
+        setOpen(true);
+    };
+    const defuse = () => {
+        const markedList = Array.from(document.querySelectorAll("li.marked"));
+        markedList.forEach((item) => {
+            item.classList.remove("marked");
+        });
+        setDeleteShiftArray([]);
+    };
+
+    // Main code
+    const s21 = [];
+    const s22 = [];
+    const s23 = [];
+    const s31 = [];
+    const s32 = [];
+    const s33 = [];
+    const s41 = [];
+    const s42 = [];
+    const s43 = [];
+    const s51 = [];
+    const s52 = [];
+    const s53 = [];
+    const s61 = [];
+    const s62 = [];
+    const s63 = [];
+    const s71 = [];
+    const s72 = [];
+    const s73 = [];
+    const s81 = [];
+    const s82 = [];
+    const s83 = [];
+    shiftsTable.forEach((item) => {
+        item.shifts.forEach((shift) => {
+            if (shift.shiftTime === 21) {
+                s21.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 22) {
+                s22.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 23) {
+                s23.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 31) {
+                s31.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 32) {
+                s32.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 33) {
+                s33.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 41) {
+                s41.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 42) {
+                s42.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 43) {
+                s43.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 51) {
+                s51.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 52) {
+                s52.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 53) {
+                s53.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 61) {
+                s61.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 62) {
+                s62.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 63) {
+                s63.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 71) {
+                s71.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 72) {
+                s72.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 73) {
+                s73.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 81) {
+                s81.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 82) {
+                s82.push({ username: item.user.username, _id: item._id });
+            }
+            if (shift.shiftTime === 83) {
+                s83.push({ username: item.user.username, _id: item._id });
+            }
+        });
+    });
+
+    console.log(deleteShiftArray);
+
+    return (
+        <div className="home-content">
+            {contextHolder}
+            <Modal
+                title="Extract the Shift Table ?"
+                open={open}
+                onOk={handleOk}
+                confirmLoading={confirmLoading}
+                onCancel={handleCancel}
+                style={{ top: "42px" }}
+            ></Modal>
+            <div className="shift__container">
+                <div className="table-title ml-32">
+                    <h1>Shift Table</h1>
+                </div>
+                <div className="shift__content">
+                    <table className="table">
+                        <thead>
+                            <tr className="shift-day mb-16">
+                                <th style={{ width: "12%" }}>
+                                    <div>Day</div>
+                                </th>
+                                <th>
+                                    <div>Monday</div>
+                                </th>
+                                <th>
+                                    <div>Tuesday</div>
+                                </th>
+                                <th>
+                                    <div>Wednesday</div>
+                                </th>
+                                <th>
+                                    <div>Thursday</div>
+                                </th>
+                                <th>
+                                    <div>Friday</div>
+                                </th>
+                                <th>
+                                    <div>Saturday</div>
+                                </th>
+                                <th>
+                                    <div>Sunday</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Shift 1</th>
+                                <td>
+                                    <List array={s21} code={21} />
+                                </td>
+                                <td>
+                                    <List array={s31} code={31} />
+                                </td>
+                                <td>
+                                    <List array={s41} code={41} />
+                                </td>
+                                <td>
+                                    <List array={s51} code={51} />
+                                </td>
+                                <td>
+                                    <List array={s61} code={61} />
+                                </td>
+                                <td>
+                                    <List array={s71} code={71} />
+                                </td>
+                                <td>
+                                    <List array={s81} code={81} />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Shift 2</th>
+                                <td>
+                                    <List array={s22} code={22} />
+                                </td>
+                                <td>
+                                    <List array={s32} code={32} />
+                                </td>
+                                <td>
+                                    <List array={s42} code={42} />
+                                </td>
+                                <td>
+                                    <List array={s52} code={52} />
+                                </td>
+                                <td>
+                                    <List array={s62} code={62} />
+                                </td>
+                                <td>
+                                    <List array={s72} code={72} />
+                                </td>
+                                <td>
+                                    <List array={s82} code={82} />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Shift 3</th>
+                                <td>
+                                    <List array={s23} code={23} />
+                                </td>
+                                <td>
+                                    <List array={s33} code={33} />
+                                </td>
+                                <td>
+                                    <List array={s43} code={43} />
+                                </td>
+                                <td>
+                                    <List array={s53} code={53} />
+                                </td>
+                                <td>
+                                    <List array={s63} code={63} />
+                                </td>
+                                <td>
+                                    <List array={s73} code={73} />
+                                </td>
+                                <td>
+                                    <List array={s83} code={83} />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div className="detail">
+                        Percent shift:{" "}
+                        <input type="number" value={percent} onChange={changePercent} />
+                        <ul style={{ marginTop: "20px" }}>
+                            {shiftsTable.map((item, index) => {
+                                if (item.shiftQuantity >= 5)
+                                    return (
+                                        <li key={index} className="mb-12">
+                                            {item.user.username}:{" "}
+                                            {Math.ceil(item.shiftQuantity * percent)} /{" "}
+                                            {item.shiftQuantity}
+                                        </li>
+                                    );
+                                else return null;
+                            })}
+                        </ul>
+                    </div>
+                </div>
+                <div className="button__store">
+                    <Button
+                        style={{ marginRight: "20px" }}
+                        size="large"
+                        type="primary"
+                        onClick={defuse}
+                        ghost
+                    >
+                        Cancel
+                    </Button>
+                    <Button size="large" type="primary" onClick={confirm}>
+                        Save
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default memo(AdminShift);
